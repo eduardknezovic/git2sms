@@ -20,7 +20,7 @@ def send_sms(username, password, to_numbers):
     sms_messages = []
     for to_number in to_numbers:
         sms_message = SmsMessage(source="php",
-                                 body="Jelly liquorice marshmallow candy carrot cake 4Eyffjs1vL.",
+                                 body="Bog i Hrvati",
                                  to=to_number,
                                  schedule=1436874701)
         sms_messages.append(sms_message)
