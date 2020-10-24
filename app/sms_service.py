@@ -4,25 +4,30 @@ import clicksend_client
 from clicksend_client import SmsMessage
 from clicksend_client.rest import ApiException
 
-def send_sms():
+def send_sms(username, password, to_numbers):
     # Configure HTTP basic authorization: BasicAuth
     configuration = clicksend_client.Configuration()
-    configuration.username = 'USERNAME'
-    configuration.password = 'API_KEY'
+    configuration.username = username
+    configuration.password = password
 
     # create an instance of the API class
     api_instance = clicksend_client.SMSApi(clicksend_client.ApiClient(configuration))
 
-    # If you want to explictly set from, add the key _from to the message.
-    sms_message = SmsMessage(source="php",
-                             body="Jelly liquorice marshmallow candy carrot cake 4Eyffjs1vL.",
-                             to="+61411111111",
-                             schedule=1436874701)
+    if not to_numbers:
+        raise ValueError("No numbers have been supplied (to_numbers is empty)")
 
-    sms_messages = clicksend_client.SmsMessageCollection(messages=[sms_message])
+    # If you want to explictly set from, add the key _from to the message.
+    sms_messages = []
+    for to_number in to_numbers:
+        sms_message = SmsMessage(source="php",
+                                 body="Jelly liquorice marshmallow candy carrot cake 4Eyffjs1vL.",
+                                 to=to_number,
+                                 schedule=1436874701)
+        sms_messages.append(sms_message)
+
+    sms_messages = clicksend_client.SmsMessageCollection(messages=sms_messages)
 
     try:
-        # Send sms message(s)
         api_response = api_instance.sms_send_post(sms_messages)
         print(api_response)
     except ApiException as e:

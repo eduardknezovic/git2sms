@@ -34,4 +34,6 @@ def main():
         time.sleep(5)
 
 if __name__ == "__main__":
-    main()
+    from config import get_config
+    print(get_config())
+    #main()
