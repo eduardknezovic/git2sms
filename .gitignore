@@ -19,3 +19,4 @@ settings_local.py
 .vscode/settings.json
 venv
 temp/
+JOURNAL.md

@@ -20,7 +20,15 @@ def get_last_remembered_commit():
     return None
 
 def send_sms():
-    print("The repo has been updated!")
+    from config import get_config
+    from sms_service import send_sms
+    config = get_config()
+    username = config["username"]
+    password = config["password"]
+    to_numbers = config["to_numbers"]
+    send_sms(username, password, to_numbers)
+    return
+
 
 def main():
     remembered_commit = get_last_remembered_commit()
@@ -34,6 +42,4 @@ def main():
         time.sleep(5)
 
 if __name__ == "__main__":
-    from config import get_config
-    print(get_config())
-    #main()
+    main()

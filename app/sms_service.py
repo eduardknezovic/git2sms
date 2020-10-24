@@ -19,10 +19,9 @@ def send_sms(username, password, to_numbers):
     # If you want to explictly set from, add the key _from to the message.
     sms_messages = []
     for to_number in to_numbers:
-        sms_message = SmsMessage(source="php",
-                                 body="Bog i Hrvati",
-                                 to=to_number,
-                                 schedule=1436874701)
+        sms_message = SmsMessage(source="sdk", # it was "php" before, what?
+                                 body="Jos jedan korak prema slavi vjecnoj",
+                                 to=to_number)
         sms_messages.append(sms_message)
 
     sms_messages = clicksend_client.SmsMessageCollection(messages=sms_messages)
